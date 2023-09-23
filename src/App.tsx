@@ -1,11 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { View } from 'react-native'
+import Routes from "./routes";
+import {AuthProvider} from "./context/auth";
 
 const App: React.FC = () => { 
   return (
     <NavigationContainer>
-      <View></View>
+      <AuthProvider>
+        <Routes/>
+      </AuthProvider>
     </NavigationContainer>
   )
 }
