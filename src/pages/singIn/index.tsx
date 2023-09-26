@@ -11,7 +11,7 @@ export const SingIn: React.FC = () => {
 
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
-      <Button title="Sing In" onPress={() => {handleSingIn}}/>
+      <Button title="Sing In" onPress={() => handleSingIn()}/>
     </View>
   )
 }
