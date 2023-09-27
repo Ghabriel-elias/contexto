@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useState} from "react";
 import AsyncStorage from '@react-native-community/async-storage'
 import authService from "../services/auth";
+import api from "../services/api";
 
 interface AuthContextProps {
   signed: boolean;
@@ -20,8 +21,9 @@ export const AuthProvider: React.FC = ({children}: any) => {
     async function loadDataUser() {
       const storageUser = await AsyncStorage.getItem('@RNAuth:user')
       const storageToken = await AsyncStorage.getItem('@RNAuth:token')
-
+      
       if(storageToken && storageUser) {
+        api.defaults.headers['Authorization'] = `Bearer ${storageToken}`
         setUser(JSON.parse(storageUser))
       }
       setLoading(false)
@@ -33,6 +35,7 @@ export const AuthProvider: React.FC = ({children}: any) => {
   async function sing() {
     const response = await authService()
     setUser(response.user)
+    api.defaults.headers['Authorization'] = `Bearer ${response.token}`
     await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user))
     await AsyncStorage.setItem('@RNAuth:token', response.token)
   }
