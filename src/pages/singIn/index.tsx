@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import {View, Button} from 'react-native'
-import AuthContext from "../../context/auth";
+import {useAuth} from "../../context/auth";
 
 export const SingIn: React.FC = () => {
-  const {sing} = useContext(AuthContext)
+  const {sing} = useAuth()
 
   async function handleSingIn() {
     sing()
